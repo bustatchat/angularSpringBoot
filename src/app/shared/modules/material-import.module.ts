@@ -1,25 +1,90 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import {NgModule} from '@angular/core';
+import {MatBadgeModule} from '@angular/material/badge';
+
 import {
-  MatToolbarModule,
-  MatMenuModule,
-  MatIconModule,
+  MatAutocompleteModule,
   MatButtonModule,
- } from '@angular/material';
+  MatCardModule,
+  MatCheckboxModule,
+  MatDialogModule,
+  MatFormFieldModule,
+  MatIconModule,
+  MatInputModule,
+  MatListModule,
+  MatDatepickerModule,
+  MatMenuModule,
+  MatNativeDateModule,
+  MatProgressBarModule,
+  MatRadioModule,
+  MatSelectModule,
+  MatSlideToggleModule,
+  MatSnackBarModule,
+  MatStepperModule,
+  MatTabsModule,
+  MatToolbarModule,
+  MatTooltipModule,
+  MatExpansionModule,
+  DateAdapter,
+  MatProgressSpinnerModule,
+  MatChipsModule
+} from '@angular/material';
 
 @NgModule({
   imports: [
-    CommonModule,
-    MatToolbarModule,
-    MatMenuModule,
-    MatIconModule,
+    MatAutocompleteModule,
     MatButtonModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatExpansionModule,
+    MatFormFieldModule,
+    MatIconModule,
+    MatInputModule,
+    MatListModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatProgressBarModule,
+    MatStepperModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    MatProgressSpinnerModule,
+    MatChipsModule,
+    MatBadgeModule
   ],
   exports: [
-    MatToolbarModule,
-    MatMenuModule,
+    MatAutocompleteModule,
+    MatButtonModule,
+    MatCardModule,
+    MatCheckboxModule,
+    MatDatepickerModule,
+    MatDialogModule,
+    MatExpansionModule,
+    MatFormFieldModule,
     MatIconModule,
-    MatButtonModule
+    MatInputModule,
+    MatListModule,
+    MatStepperModule,
+    MatMenuModule,
+    MatNativeDateModule,
+    MatProgressBarModule,
+    MatRadioModule,
+    MatSelectModule,
+    MatSlideToggleModule,
+    MatSnackBarModule,
+    MatTabsModule,
+    MatToolbarModule,
+    MatTooltipModule,
+    MatProgressSpinnerModule,
+    MatChipsModule,
+    MatBadgeModule
   ],
+  providers: [],
 })
-export class MaterialImportModule { }
+export class MaterialImportModule {
+}

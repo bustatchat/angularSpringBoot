@@ -9,10 +9,23 @@
       </span>
 
       <span >
-        <button class="login" mat-button routerLink="/login" routerLinkActive="active">Login</button>
-        <button class="register" mat-button  routerLink="/register" routerLinkActive="active">Register</button>
+        <button class="login" mat-button routerLink="/login" routerLinkActive="active">{{ 'common.login' | translate }}</button>
+        <button class="register" mat-button  routerLink="/register" routerLinkActive="active">{{ 'common.register' | translate }}</button>
         <span class="between-distance" ></span>
       </span>
+
+      <button mat-icon-button [matMenuTriggerFor]="langMenu">
+        <mat-icon>language</mat-icon>
+        <span>{{translate.currentLang | uppercase}}</span>
+      </button>
+      <mat-menu #langMenu="matMenu">
+        <button mat-menu-item (click)="changeLanguage('de')">
+          Deutsch
+        </button>
+        <button mat-menu-item (click)="changeLanguage('en')">
+          English
+        </button>
+      </mat-menu>
 
       <button mat-icon-button [matMenuTriggerFor]="menu" class="menu-button">
         <mat-icon>more_vert</mat-icon>
@@ -20,15 +33,15 @@
       <mat-menu #menu="matMenu">
         <button mat-menu-item routerLink="/about" routerLinkActive="active">
           <mat-icon>info</mat-icon>
-          <span>about</span>
+          <span>{{ 'mainMenu.about' | translate }}</span>
         </button>
         <button mat-menu-item routerLink="/legalnotice" routerLinkActive="active">
           <mat-icon>info</mat-icon>
-          <span>legalnotice</span>
+          <span>{{ 'mainMenu.legalnotice' | translate }}</span>
         </button>
         <button mat-menu-item routerLink="/privacy" routerLinkActive="active">
           <mat-icon>info</mat-icon>
-          <span>privacy</span>
+          <span>{{ 'mainMenu.privacy' | translate }}</span>
         </button>
       </mat-menu>
     </mat-toolbar-row>
