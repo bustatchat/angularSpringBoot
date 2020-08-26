@@ -17,7 +17,9 @@ public class User {
   private Integer user_id;
   private String first_name;
   private String last_name;
-  private Boolean is_admin;
+  @Column(columnDefinition = "integer default 0")
+  private int is_admin;
+  private String password;
   private String email;
   private Date created_date;
   private String created_ip;
@@ -28,13 +30,14 @@ public class User {
   @Column(columnDefinition = "integer default 0")
   private int deleted;
 
-  public User(String email, String firstName, String lastName,Boolean isAdmin ) {
-
+  public User(String email, String first_name, String last_name, int is_admin, String password) {
+    
     try {
-      this.first_name   = firstName;
-      this.last_name    = lastName;
-      this.is_admin     = isAdmin;
+      this.first_name   = first_name;
+      this.last_name    = last_name;
+      this.is_admin     = is_admin;
       this.email        = email;
+      this.password     = password;
       this.created_date = new Date();
       this.created_ip   = InetAddress.getLocalHost().getHostAddress();
       this.deleted      = 0;
@@ -43,7 +46,7 @@ public class User {
    }
 
   }
-
+  
   public String getChangedIP() {
     return this.changed_ip;
   }
@@ -79,7 +82,7 @@ public class User {
     return this.last_name;
   }
 
-  public Boolean getIsAdmin() {
+  public int getIsAdmin() {
     return this.is_admin;
   }
 
@@ -93,5 +96,13 @@ public class User {
 
   public void setEmail(String email) {
     this.email = email;
+  }
+
+  public  String getPassword() {
+    return this.password;
+  }
+
+  public void setPassword(String password) {
+    this.password = password;
   }
 }
