@@ -21,44 +21,42 @@
   </mat-card-header>
   <mat-card-content>
     <form name="form" (ngSubmit)="register()" [formGroup]="registerForm">
-      <div class="form-group" formGroupName="profile">
-        <mat-form-field>
-          <input matInput formControlName="firstName"
-                 [placeholder]="'common.profileDetails.firstName'|translate" maxlength="64"/>
-          <div *ngIf="registerForm.get('profile').get('firstName').touched">
-            <small *ngIf="registerForm.get('profile').get('firstName').hasError('required')"
-                   class="text-danger">
-              {{'common.validation.required'|translate}}
-            </small>
-            <small *ngIf="registerForm.get('profile').get('firstName').hasError('minlength')"
-                   class="text-danger" translate [translateParams]="{min:2}">
-              common.validation.minLength
-            </small>
-            <small *ngIf="registerForm.get('profile').get('firstName').hasError('maxlength')"
-                   class="text-danger" translate [translateParams]="{max:64}">
-              common.validation.maxLength
-            </small>
-          </div>
-        </mat-form-field>
-        <mat-form-field>
-          <input matInput formControlName="lastName"
-                 [placeholder]="'common.profileDetails.lastName'|translate" maxlength="64"/>
-          <div *ngIf="registerForm.get('profile').get('lastName').touched">
-            <small *ngIf="registerForm.get('profile').get('lastName').hasError('required')"
-                   class="text-danger">
-              {{'common.validation.required'|translate}}
-            </small>
-            <small *ngIf="registerForm.get('profile').get('lastName').hasError('minlength')"
-                   class="text-danger" translate [translateParams]="{min:2}">
-              common.validation.minLength
-            </small>
-            <small *ngIf="registerForm.get('profile').get('lastName').hasError('maxlength')"
-                   class="text-danger" translate [translateParams]="{max:64}">
-              common.validation.maxLength
-            </small>
-          </div>
-        </mat-form-field>
-      </div>
+      <mat-form-field>
+        <input matInput formControlName="first_name"
+                [placeholder]="'common.profileDetails.firstName'|translate" maxlength="64"/>
+        <div *ngIf="registerForm.controls.first_name.touched">
+          <small *ngIf="registerForm.controls.first_name.hasError('required')"
+                  class="text-danger">
+            {{'common.validation.required'|translate}}
+          </small>
+          <small *ngIf="registerForm.controls.first_name.hasError('minlength')"
+                  class="text-danger" translate [translateParams]="{min:2}">
+            common.validation.minLength
+          </small>
+          <small *ngIf="registerForm.controls.first_name.hasError('maxlength')"
+                  class="text-danger" translate [translateParams]="{max:64}">
+            common.validation.maxLength
+          </small>
+        </div>
+      </mat-form-field>
+      <mat-form-field>
+        <input matInput formControlName="last_name"
+                [placeholder]="'common.profileDetails.lastName'|translate" maxlength="64"/>
+        <div *ngIf="registerForm.controls.last_name.touched">
+          <small *ngIf="registerForm.controls.last_name.hasError('required')"
+                  class="text-danger">
+            {{'common.validation.required'|translate}}
+          </small>
+          <small *ngIf="registerForm.controls.last_name.hasError('minlength')"
+                  class="text-danger" translate [translateParams]="{min:2}">
+            common.validation.minLength
+          </small>
+          <small *ngIf="registerForm.controls.last_name.hasError('maxlength')"
+                  class="text-danger" translate [translateParams]="{max:64}">
+            common.validation.maxLength
+          </small>
+        </div>
+      </mat-form-field>
 
       <mat-form-field>
         <input matInput formControlName="email" [placeholder]="'common.email'|translate"/>

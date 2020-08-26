@@ -3,7 +3,7 @@ import { emailValidator } from '../../shared/validators/validators';
 import { Validators, FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { errorCodes } from '../../../../src/main/java/com/example/demo/api/config/errorCodes';
-import { Console } from 'console';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-register',
@@ -19,13 +19,16 @@ export class RegisterComponent implements OnInit {
 
   private trimFormFields() {
     this.registerForm.value.email = this.registerForm.value.email.trim();
-    this.registerForm.value.profile.firstName = this.registerForm.value.profile.firstName.trim();
-    this.registerForm.value.profile.lastName = this.registerForm.value.profile.lastName.trim();
+    this.registerForm.value.first_name = this.registerForm.value.first_name.trim();
+    this.registerForm.value.last_name = this.registerForm.value.last_name.trim();
     if (this.registerForm.value.uid) {
       this.registerForm.value.uid = this.registerForm.value.uid.trim();
     }
   }
-  constructor(private formBuilder: FormBuilder) { }
+
+  constructor(private formBuilder: FormBuilder,
+              private userService: UserService
+    ) { }
 
   ngOnInit() {
     this.generateForm();
@@ -42,9 +45,8 @@ export class RegisterComponent implements OnInit {
 
     this.registerForm.value.email = this.registerForm.value.email.replace(/\s/g, '').toLowerCase();
     this.trimFormFields();
-    console.warn(this.registerForm.value);
-    /*this.authenticationService.register(this.registerForm.value).then(
-      (val) => {
+    this.userService.createItem(this.registerForm.value)
+    .then(() => {
         this.registrationDone = true;
       })
       .catch((err) => {
@@ -52,8 +54,8 @@ export class RegisterComponent implements OnInit {
       })
       .then(() => {
         this.loading = false;
-        this.showProgress.toggleLoadingGlobal(this.loading);
-      });*/
+        /*this.showProgress.toggleLoadingGlobal(this.loading);*/
+      });
   }
 
   private handleError(err) {
@@ -66,10 +68,6 @@ export class RegisterComponent implements OnInit {
         this.mailError = errorCodes.mail.noTeacher.text;
         break;
       }
-      case errorCodes.duplicateUid.code: {
-        this.uidError = errorCodes.duplicateUid.text;
-        break;
-      }
       default: {
         /*this.snackBar.open('Registration failed');*/
       }
@@ -78,10 +76,8 @@ export class RegisterComponent implements OnInit {
 
   generateForm() {
     this.registerForm = this.formBuilder.group({
-      profile: this.formBuilder.group({
-        firstName: ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(64)])],
-        lastName: ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(64)])],
-      }),
+      first_name: ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(64)])],
+      last_name: ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(64)])],
       email: ['', Validators.compose([emailValidator, Validators.required])],
     });
   }
