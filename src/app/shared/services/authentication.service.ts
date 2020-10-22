@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import { DataService } from './data.service';
 import { BackendService } from './backend.service';
 import { UserService } from './user.service';
+import { IUser } from 'shared/models/IUser';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +18,9 @@ export class AuthenticationService {
    }
 
    async login(email: String, password: String) {
+
      return new Promise((res, rej) => {
-      this.backendServise.post(AuthenticationService.API_URL + '/login', {email: email, password: password}).subscribe((response) => {
+      this.backendServise.post(AuthenticationService.API_URL + '/signin', {email: email, password: password}).subscribe((response) => {
         this.isLoggedIn = true;
         localStorage.setItem('isLoggedIn', 'true');
         this.userService.setUser(response['user']);
@@ -27,5 +30,23 @@ export class AuthenticationService {
       });
      });
    }
+
+   register(user: IUser) {
+
+    return new Promise((resolve, reject) => {
+
+      return this.backendServise.post(
+        AuthenticationService.API_URL + '/signup',
+        user
+      )
+      .subscribe(
+        (json) => {
+          resolve();
+        }, (err) => {
+          reject(err);
+        });
+    });
+
+  }
 
 }

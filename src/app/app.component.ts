@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { TranslateService } from '@ngx-translate/core';
+import { UserService } from 'src/app/shared/services/user.service';
 
 @Component({
   selector: 'app-root',
@@ -9,7 +10,9 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class AppComponent implements OnInit {
   title = 'app works!';
-  constructor(public translate: TranslateService) {
+  content: string;
+
+  constructor(public translate: TranslateService, private userService: UserService) {
     translate.setDefaultLang('en');
   }
 
