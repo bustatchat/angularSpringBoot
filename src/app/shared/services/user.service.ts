@@ -3,6 +3,7 @@ import { DataService } from './data.service';
 import { BackendService } from './backend.service';
 import { IUser } from '../../../../shared/models/IUser';
 import { User } from '../models/User';
+import { Observable } from 'rxjs';
 
 @Injectable()
 export class UserService extends DataService {
@@ -22,4 +23,5 @@ export class UserService extends DataService {
     this.user = new User(user);
     localStorage.setItem('user', JSON.stringify(this.user));
   }
+
 }

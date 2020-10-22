@@ -50,4 +50,8 @@ export class BackendService {
     return this.http.delete(BackendService.API_URL + serviceUrl, this.defaultHttpClientOptions)
       .pipe(catchError(this.handleUnauthorized));
   }
+
+  getPublicContent(): Observable<any> {
+    return this.http.get(BackendService.API_URL + 'test/all', { responseType: 'text' });
+  }
 }

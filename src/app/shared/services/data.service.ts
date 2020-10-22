@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { BackendService } from './backend.service';
 
 @Injectable()
@@ -35,4 +36,5 @@ export class DataService {
       .delete(this.apiPath + id)
       .toPromise();
   }
+
 }

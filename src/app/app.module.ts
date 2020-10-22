@@ -11,6 +11,7 @@ import { AuthModule } from './auth/auth.module';
 import { RouterModule } from '@angular/router';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { UserService } from './shared/services/user.service';
+import { AuthInterceptorProvider } from '../app/helper/auth.interceptor';
 
 // AoT requires an exported function for factories
 export function HttpLoaderFactory(http: HttpClient) {
@@ -41,6 +42,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   providers: [
     BackendService,
     UserService,
+    AuthInterceptorProvider,
   ],
   bootstrap: [AppComponent]
 })

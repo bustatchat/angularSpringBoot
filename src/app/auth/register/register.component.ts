@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { emailValidator } from '../../shared/validators/validators';
 import { Validators, FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { errorCodes } from '../../../../src/main/java/com/example/demo/api/config/errorCodes';
+import { errorCodes } from '../../shared/errorCodes';
 import { UserService } from 'src/app/shared/services/user.service';
+import { AuthenticationService } from 'src/app/shared/services/authentication.service';
+
 
 @Component({
   selector: 'app-register',
@@ -19,15 +21,15 @@ export class RegisterComponent implements OnInit {
 
   private trimFormFields() {
     this.registerForm.value.email = this.registerForm.value.email.trim();
-    this.registerForm.value.first_name = this.registerForm.value.first_name.trim();
-    this.registerForm.value.last_name = this.registerForm.value.last_name.trim();
+    this.registerForm.value.username = this.registerForm.value.username.trim();
     if (this.registerForm.value.uid) {
       this.registerForm.value.uid = this.registerForm.value.uid.trim();
     }
   }
 
   constructor(private formBuilder: FormBuilder,
-              private userService: UserService
+              private userService: UserService,
+              private authenticationService: AuthenticationService
     ) { }
 
   ngOnInit() {
@@ -38,14 +40,15 @@ export class RegisterComponent implements OnInit {
     this.mailError = null;
   }
 
-  register() {
+  signup() {
     this.clearAllErrors();
     this.loading = true;
     /*this.showProgress.toggleLoadingGlobal(this.loading);*/
 
     this.registerForm.value.email = this.registerForm.value.email.replace(/\s/g, '').toLowerCase();
     this.trimFormFields();
-    this.userService.createItem(this.registerForm.value)
+    /*this.userService.createItem(this.registerForm.value)*/
+    this.authenticationService.register(this.registerForm.value)
     .then(() => {
         this.registrationDone = true;
       })
@@ -76,8 +79,7 @@ export class RegisterComponent implements OnInit {
 
   generateForm() {
     this.registerForm = this.formBuilder.group({
-      first_name: ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(64)])],
-      last_name: ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(64)])],
+      username: ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(64)])],
       email: ['', Validators.compose([emailValidator, Validators.required])],
     });
   }

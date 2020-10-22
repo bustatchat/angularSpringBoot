@@ -119,6 +119,7 @@
       "profileDetails": {
         "firstName": "Vorname",
         "lastName": "Nachname",
+        "userName": "Benutzername",
         "uid": "Matrikelnummer",
         "uploadPicture": "Bild hochladen"
       },
