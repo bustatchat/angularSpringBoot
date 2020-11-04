@@ -17,13 +17,15 @@ export class AuthenticationService {
 
    }
 
-   async login(email: String, password: String) {
+   async login(username: String, password: String) {
 
      return new Promise((res, rej) => {
-      this.backendServise.post(AuthenticationService.API_URL + '/signin', {email: email, password: password}).subscribe((response) => {
+      this.backendServise.post(AuthenticationService.API_URL + '/signin', {username: username, password: password})
+      .subscribe((response) => {
         this.isLoggedIn = true;
         localStorage.setItem('isLoggedIn', 'true');
-        this.userService.setUser(response['user']);
+        this.userService.setUser(response);
+        console.log(localStorage);
         res();
       }, (err) => {
         rej(err);
@@ -31,10 +33,18 @@ export class AuthenticationService {
      });
    }
 
-   register(user: IUser) {
+   register(user) {
+    const role: string[] = [];
+
+    for (const [key, val] of Object.entries(user.role)) {
+      if (val) {
+        role.push(key);
+      }
+    }
+
+    user.role = role;
 
     return new Promise((resolve, reject) => {
-
       return this.backendServise.post(
         AuthenticationService.API_URL + '/signup',
         user

@@ -1,4 +1,4 @@
-import {FormControl, FormGroup} from '@angular/forms';
+import {FormControl, FormGroup, ValidatorFn} from '@angular/forms';
 
 export function matchPasswords(passwordKey: string, confirmPasswordKey: string) {
   return (group: FormGroup): { [key: string]: any } => {
@@ -28,5 +28,30 @@ export function emailValidator(formControl: FormControl) {
     emailValidator: {
       valid: false
     }
+  };
+}
+
+/**
+ *
+ * @param minRequired
+ */
+export function requireCheckboxesToBeCheckedValidator(minRequired = 1): ValidatorFn {
+  return function validate (formGroup: FormGroup) {
+    let checked = 0;
+
+    Object.keys(formGroup.controls).forEach(key => {
+      const control = formGroup.controls[key];
+
+      if (control.value === true) {
+        checked ++;
+      }
+    });
+
+    if (checked < minRequired) {
+      return {
+        requireOneCheckboxToBeChecked: true,
+      };
+    }
+    return null;
   };
 }

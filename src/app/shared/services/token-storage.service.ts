@@ -20,8 +20,6 @@ export class TokenStorageService {
   }
 
   public getToken(): string {
-    console.log(window.sessionStorage.getItem(TOKEN_KEY));
-    console.log(sessionStorage.getItem(TOKEN_KEY));
     return window.sessionStorage.getItem(TOKEN_KEY);
   }
 
