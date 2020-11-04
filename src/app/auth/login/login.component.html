@@ -6,7 +6,7 @@
   <mat-card-content>
     <form name="form" (ngSubmit)="login()" [formGroup]="loginForm">
       <mat-form-field>
-        <input matInput formControlName="email" [placeholder]="'common.email'|translate">
+        <input matInput formControlName="username" [placeholder]="'common.username'|translate">
       </mat-form-field>
       <mat-form-field>
         <input matInput type="password" formControlName="password" [placeholder]="'common.password'|translate">

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { emailValidator } from '../../shared/validators/validators';
+import { emailValidator, requireCheckboxesToBeCheckedValidator } from '../../shared/validators/validators';
 import { Validators, FormGroup, FormBuilder, FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { errorCodes } from '../../shared/errorCodes';
@@ -19,14 +19,6 @@ export class RegisterComponent implements OnInit {
   uidError = null;
   mailError = null;
 
-  private trimFormFields() {
-    this.registerForm.value.email = this.registerForm.value.email.trim();
-    this.registerForm.value.username = this.registerForm.value.username.trim();
-    if (this.registerForm.value.uid) {
-      this.registerForm.value.uid = this.registerForm.value.uid.trim();
-    }
-  }
-
   constructor(private formBuilder: FormBuilder,
               private userService: UserService,
               private authenticationService: AuthenticationService
@@ -34,6 +26,15 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
     this.generateForm();
+  }
+
+  private trimFormFields() {
+    this.registerForm.value.email = this.registerForm.value.email.trim();
+    this.registerForm.value.username = this.registerForm.value.username.trim();
+
+    if (this.registerForm.value.uid) {
+      this.registerForm.value.uid = this.registerForm.value.uid.trim();
+    }
   }
 
   clearAllErrors() {
@@ -79,6 +80,10 @@ export class RegisterComponent implements OnInit {
 
   generateForm() {
     this.registerForm = this.formBuilder.group({
+      role: new FormGroup({
+        user: new FormControl(false),
+        mod:  new FormControl(false),
+      }, requireCheckboxesToBeCheckedValidator()),
       username: ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(64)])],
       email: ['', Validators.compose([emailValidator, Validators.required])],
     });

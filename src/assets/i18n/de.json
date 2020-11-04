@@ -33,6 +33,7 @@
         "acceptCheckboxes": "Ich akzeptiere gelis ",
         "back": "Zurück zur Startseite",
         "mailSent": "Wir haben Ihnen einen Aktivierungslink an Ihre E-Mail-Adresse gesendet.",
+        "mod": "Moderator",
         "privacyDeclaration": "Datenschutzerklärung",
         "registerAs": "Registrieren als",
         "register": "Registrieren",
@@ -40,7 +41,9 @@
         "successful": "Registrierung erfolgreich",
         "teacherRegistrationButton": "Kein Student?",
         "termsOfUse": "Nutzungsbedingungen",
-        "tooltipRegister": "Klicken Sie hier, um Ihre Registrierung abzuschließen."
+        "tooltipRegister": "Klicken Sie hier, um Ihre Registrierung abzuschließen.",
+        "user": "Benutzer",
+        "userRole": "Benutzerrole"
       },
       "resendActivation": {
         "back": "Zurück zur Registrierung",
@@ -157,7 +160,8 @@
         "password": "Passwörter müssen aus mindestens 8 Zeichen, inklusive einem Sonderzeichen und einer Ziffer bestehen",
         "wrong_mimeType": "Falsches Dateiformat. Es sind nur Bilder erlaubt!",
         "passwordsMatch": "Die Passwörter stimmen nicht überein.",
-        "required": "Eingabe notwendig"
+        "required": "Eingabe notwendig",
+        "SelectRole": "Mindestens eine Rolle ist erforderlich"
       },
       "videos": "Videos",
       "line": "Zeile",

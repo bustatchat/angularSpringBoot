@@ -24,8 +24,8 @@ export class LoginComponent implements OnInit {
 
   login() {
     /*each space character is being replaced, character by character, with the empty string*/
-    this.loginForm.value.email = this.loginForm.value.email.replace(/\s/g, '').toLowerCase();
-    this.authenticationService.login(this.loginForm.value.email, this.loginForm.value.password).then(
+    this.loginForm.value.email = this.loginForm.value.username.replace(/\s/g, '').toLowerCase();
+    this.authenticationService.login(this.loginForm.value.username, this.loginForm.value.password).then(
       () => {
 
         /*if (this.authGuard.redirectUrl) {
@@ -39,6 +39,7 @@ export class LoginComponent implements OnInit {
         this.loading = false;
 
         this.snackBar.open('auth.login.success');*/
+        this.router.navigate(['/']);
       })
       .catch(response => {
        /* this.showProgress.toggleLoadingGlobal(false);
@@ -50,7 +51,7 @@ export class LoginComponent implements OnInit {
 
   generateForm() {
     this.loginForm = this.formBuider.group({
-      email: ['', Validators.required],
+      username: ['', Validators.required],
       password: ['', Validators.required]
     });
   }
