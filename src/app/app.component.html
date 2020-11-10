@@ -1,19 +1,23 @@
-<div class="app-wrapper special-style">
+<div class="{{ 'app-wrapper ' + specialContainerStyle() }}">
   <mat-toolbar color="primary">
     <mat-toolbar-row>
 
-      <a routerLink="/" class="logo">Bank</a>
+      <a routerLink="/" class="logo">Chat</a>
 
       <span class="non-production-warning">
         <a  title=""></a>
       </span>
 
-      <span >
+      <span *ngIf="!isLoggedIn()">
         <button class="login" mat-button routerLink="/login" routerLinkActive="active">{{ 'common.login' | translate }}</button>
         <button class="register" mat-button  routerLink="/register" routerLinkActive="active">{{ 'common.register' | translate }}</button>
         <span class="between-distance" ></span>
       </span>
-
+      <span *ngIf="isLoggedIn()">
+        <button mat-button routerLink="/profile">
+          <span class="username-wrapper">{{ this.userService.user.username}}</span>
+        </button>
+      </span>
       <button mat-icon-button [matMenuTriggerFor]="langMenu">
         <mat-icon>language</mat-icon>
         <span>{{translate.currentLang | uppercase}}</span>
@@ -31,6 +35,14 @@
         <mat-icon>more_vert</mat-icon>
       </button>
       <mat-menu #menu="matMenu">
+        <button mat-menu-item *ngIf="isLoggedIn() && isAdmin()" routerLink="/admin" routerLinkActive="active">
+          <mat-icon>settings</mat-icon>
+          <span>{{ 'mainMenu.admin' | translate }}</span>
+        </button>
+        <button mat-menu-item *ngIf="isLoggedIn() && !isAdmin()" routerLink="/userSettings" routerLinkActive="active">
+          <mat-icon>settings</mat-icon>
+          <span>{{ 'mainMenu.userSettings' | translate }}</span>
+        </button>
         <button mat-menu-item routerLink="/about" routerLinkActive="active">
           <mat-icon>info</mat-icon>
           <span>{{ 'mainMenu.about' | translate }}</span>
@@ -42,6 +54,10 @@
         <button mat-menu-item routerLink="/privacy" routerLinkActive="active">
           <mat-icon>info</mat-icon>
           <span>{{ 'mainMenu.privacy' | translate }}</span>
+        </button>
+        <button mat-menu-item *ngIf="isLoggedIn()" (click)="logout()" routerLink="" routerLinkActive="active">
+          <mat-icon>exit_to_app</mat-icon>
+          <span>{{ 'mainMenu.logout' | translate }}</span>
         </button>
       </mat-menu>
     </mat-toolbar-row>

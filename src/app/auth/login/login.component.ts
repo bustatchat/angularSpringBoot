@@ -39,7 +39,7 @@ export class LoginComponent implements OnInit {
         this.loading = false;
 
         this.snackBar.open('auth.login.success');*/
-        this.router.navigate(['/']);
+        this.router.navigate(['/profile']);
       })
       .catch(response => {
        /* this.showProgress.toggleLoadingGlobal(false);
