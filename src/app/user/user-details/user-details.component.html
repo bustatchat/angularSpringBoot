@@ -1,0 +1,6 @@
+<div class="user-detail-wrapper">
+  <h1>{{ 'common.profile' | translate}}</h1>
+
+ <app-user-profile *ngIf="user" [user]="user" [userId]="this.userService.user.id"></app-user-profile>
+
+</div>

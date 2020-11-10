@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { DataService } from './data.service';
 import { BackendService } from './backend.service';
 import { UserService } from './user.service';
+import { Router } from '@angular/router';
 import { IUser } from 'shared/models/IUser';
 import { Observable } from 'rxjs';
 
@@ -13,8 +14,11 @@ export class AuthenticationService {
 
   public isLoggedIn: Boolean = false;
 
-  constructor(private backendServise: BackendService, private userService: UserService) {
+  constructor(private backendServise: BackendService,
+              private router: Router,
+              private userService: UserService) {
 
+    this.isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
    }
 
    async login(username: String, password: String) {
@@ -23,14 +27,36 @@ export class AuthenticationService {
       this.backendServise.post(AuthenticationService.API_URL + '/signin', {username: username, password: password})
       .subscribe((response) => {
         this.isLoggedIn = true;
-        localStorage.setItem('isLoggedIn', 'true');
         this.userService.setUser(response);
-        console.log(localStorage);
+        this.userService.setToken(response.accessToken);
         res();
       }, (err) => {
         rej(err);
       });
      });
+   }
+
+   unsetAuthData() {
+    this.isLoggedIn = false;
+    localStorage.removeItem('isLoggedIn');
+    this.userService.unsetUser();
+  }
+
+  reloadUser() {
+    if (this.isLoggedIn && this.userService.user) {
+      return this.backendServise.get(AuthenticationService.API_URL + '/user/' + this.userService.user.id)
+      .subscribe(
+        (response) => {
+          this.userService.setUser(response);
+        }, () => {
+          this.logout();
+        });
+    }
+  }
+
+   logout() {
+    this.unsetAuthData();
+    this.router.navigate(['login']);
    }
 
    register(user) {
@@ -48,15 +74,12 @@ export class AuthenticationService {
       return this.backendServise.post(
         AuthenticationService.API_URL + '/signup',
         user
-      )
-      .subscribe(
+      ).subscribe(
         (json) => {
           resolve();
         }, (err) => {
           reject(err);
         });
     });
-
   }
-
 }

@@ -1,0 +1,14 @@
+<div class="profile" *ngIf="user">
+  <h3 class="name-section">
+    <a  [routerLink]="['/profile', user.id]" routerLinkActive="active">
+      <span class="name">{{user.username}}</span>
+    </a>
+    <span class="name">{{user.username}}</span>
+  </h3>
+  <div class="user-data">
+    <span><strong>{{ 'common.email' | translate }}: </strong><a href="mailto:{{user.email}}">{{user.email}}</a></span>
+    <span>
+      <strong>{{ 'common.profileDetails.uid' | translate}}: </strong>{{user.id}}
+    </span>
+  </div>
+</div>

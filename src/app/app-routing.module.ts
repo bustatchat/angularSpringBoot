@@ -3,10 +3,16 @@ import {CommonModule } from '@angular/common';
 import {LoginComponent} from './auth/login/login.component';
 import {RegisterComponent} from './auth/register/register.component';
 import {RouterModule, Routes} from '@angular/router';
+
 const routes: Routes = [
   {path: 'login', component: LoginComponent},
   {path: 'register', component: RegisterComponent},
+  {
+    path: 'profile',
+    loadChildren: './user/user.module#UserModule'
+  },
 ];
+
 @NgModule({
   declarations: [],
   imports: [

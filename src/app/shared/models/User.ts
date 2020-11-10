@@ -1,14 +1,18 @@
 import {IUser} from '../../../../shared/models/IUser';
 
 export class User implements IUser {
+  id: number;
   username: string;
   email: string;
-  password: string;
+  roles: string[];
+  accessToken: string;
 
   constructor(user: any) {
-        this.email = user.email;
-        this.username = user.username;
-        this.password = user.password;
+    this.id          = user.id;
+    this.username    = user.username;
+    this.email       = user.email;
+    this.roles       = user.roles;
+    this.accessToken = user.accessToken;
   }
 
 }
