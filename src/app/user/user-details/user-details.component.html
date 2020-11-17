@@ -3,4 +3,10 @@
 
  <app-user-profile *ngIf="user" [user]="user" [userId]="this.userService.user.id"></app-user-profile>
 
+ <div class="button-wrapper" *ngIf="user">
+  <button mat-raised-button class="mat-button" color="primary" [routerLink]="['userEdit', this.userService.user.id]">
+        <mat-icon>edit</mat-icon>
+      {{ 'common.editProfile' | translate }}
+  </button>
+ </div>
 </div>
