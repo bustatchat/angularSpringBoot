@@ -4,11 +4,11 @@ import { Observable } from 'rxjs/Observable';
 import { catchError} from 'rxjs/operators';
 import { throwError} from 'rxjs/index';
 import { EMPTY } from 'rxjs';
-
+import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class BackendService {
-  public static readonly API_URL = 'http://localhost:8080/api/';
+  public static readonly API_URL = environment.baseUrl + '/api/';
 
   constructor(private http: HttpClient) { }
 
