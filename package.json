@@ -3,11 +3,12 @@
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",
-    "heroku-postbuild": "ng build --prod && npm install http-server-spa -g",
-    "start": "http-server-spa index.html $PORT",
+    "build": "ng build",
+    "start": "node server.js",
     "test": "ng test",
     "lint": "ng lint",
-    "e2e": "ng e2e"
+    "e2e": "ng e2e",
+    "postinstall": "ng build --aot -prod"
   },
   "private": true,
   "dependencies": {
@@ -26,7 +27,9 @@
     "@ngx-translate/http-loader": "^6.0.0",
     "bootstrap": "^3.4.1",
     "core-js": "^2.6.11",
+    "express": "^4.17.1",
     "jquery": "^3.5.1",
+    "path": "^0.12.7",
     "rxjs": "^6.6.3",
     "rxjs-compat": "^6.6.3",
     "tslib": "^1.14.1",
