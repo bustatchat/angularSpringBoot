@@ -60,7 +60,7 @@ export class AuthenticationService {
    }
 
    register(user) {
-    const role: string[] = [];
+    /*const role: string[] = [];
 
     for (const [key, val] of Object.entries(user.role)) {
       if (val) {
@@ -68,7 +68,7 @@ export class AuthenticationService {
       }
     }
 
-    user.role = role;
+    user.role = role;*/
 
     return new Promise((resolve, reject) => {
       return this.backendServise.post(

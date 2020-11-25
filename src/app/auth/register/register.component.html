@@ -56,30 +56,6 @@
         </div>
       </mat-form-field>
       <app-password-input [form]="registerForm"></app-password-input>
-      <div class="form-group" formGroupName="role">
-        <mat-list role="list">
-          <mat-list-item role="listitem">
-            <mat-checkbox class="terms-checkbox"  formControlName="user" value="user">
-              <span class="privacy-label">
-                {{'auth.registration.user' | translate}}
-              </span>
-            </mat-checkbox>
-          </mat-list-item>
-          <mat-list-item role="listitem">
-            <mat-checkbox class="privacy-checkbox" formControlName="mod" value="mod">
-              <span class="privacy-label">
-                {{'auth.registration.mod' | translate}}
-              </span>
-            </mat-checkbox> 
-          </mat-list-item>
-        </mat-list>
-        <div class="invalid-feedback" *ngIf="registerForm.controls['role'].errors && !registerForm.controls['role'].errors.requireOneCheckboxToBeChecked">
-          <small class="text-danger">
-            {{'common.validation.SelectRole'|translate}}
-          </small>
-        </div>
-      </div>
-     
       <button class="register-button" [matTooltip]="'auth.registration.tooltipRegister' | translate" mat-raised-button color="primary" type="submit"
                 [disabled]="loading || !registerForm?.valid">{{'common.register'|translate}}
       </button>

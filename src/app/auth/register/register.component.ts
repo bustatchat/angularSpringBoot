@@ -79,10 +79,6 @@ export class RegisterComponent implements OnInit {
 
   generateForm() {
     this.registerForm = this.formBuilder.group({
-      role: new FormGroup({
-        user: new FormControl(false),
-        mod:  new FormControl(false),
-      }, requireCheckboxesToBeCheckedValidator()),
       username: ['', Validators.compose([Validators.required, Validators.minLength(2), Validators.maxLength(64)])],
       email: ['', Validators.compose([emailValidator, Validators.required])],
     });
