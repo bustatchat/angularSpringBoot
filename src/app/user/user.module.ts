@@ -4,7 +4,6 @@ import { SharedModule } from '../shared/shared.module';
 import { UserDetailsComponent } from './user-details/user-details.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { UserRoutingModule } from './user-routing.module';
-import { MatTableModule } from '@angular/material';
 import { UserEditComponent } from './user-edit/user-edit.component';
 
 @NgModule({
